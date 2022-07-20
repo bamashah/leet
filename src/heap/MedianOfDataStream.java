@@ -12,7 +12,7 @@ public class MedianOfDataStream {
     
     public MedianOfDataStream() {
     	minHeapOfLarger = new PriorityQueue<Integer>();
-    	maxHeapOfSmaller = new PriorityQueue<Integer>(new MaxComparator());
+    	maxHeapOfSmaller = new PriorityQueue<Integer>((a,b) -> b - a);
     }
     
     public void addNum(int num) {

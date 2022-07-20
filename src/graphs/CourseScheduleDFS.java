@@ -72,7 +72,7 @@ public class CourseScheduleDFS {
     }
     
 	public static void main(String[] args) {
-		int courses[][] = {{1,0},{2,0},{0,3},{3,4},{4,5},{4,6},{6,7},{7,5}};
+		int courses[][] = {{1,0},{2,0},{0,3},{3,4},{4,5},{4,6},{6,7},{7,5},{5,1}};
 		System.out.println(canFinish(8, courses));
 	}
 

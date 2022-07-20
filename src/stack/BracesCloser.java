@@ -15,13 +15,6 @@ import java.util.Stack;
 
 public class BracesCloser {
 
-	private static boolean isOpeningBrace (char c) {
-        if (c == '(' || c == '{' || c == '[')
-            return true;
-        else 
-            return false;
-    }
-    
     private static boolean isValidPair (char closing, char opening) {
         if (opening == '(' && closing == ')')
             return true;
@@ -34,36 +27,28 @@ public class BracesCloser {
     }
     
     public static boolean isValid(String s) {
-        Stack<Character> stack = new Stack<Character>();
-        
-        char[] parens = s.toCharArray();
-        
-        for (int i = 0; i < parens.length; i++) {
-            char paren = parens[i];
-            
-            if (isOpeningBrace(paren)) {
-                stack.push(paren);   
-            } else {
-                // closing brace
-                char popped;
-                
-                try {
-                    popped = stack.pop();
-                } catch (java.util.EmptyStackException e) {
-                    return false;    
-                }
-                
-                if (!isValidPair(paren, popped)) {
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (c == '(' || c == '{' || c == '[')
+                stack.push(c);
+
+            if (c == ')' || c == '}' || c == ']') {
+                if (stack.isEmpty())
                     return false;
-                } 
-                
+                char popped = stack.pop();
+
+                if (!isValidPair(c, popped))
+                    return false;
             }
         }
 
-        if (!stack.empty())
+        if (stack.isEmpty())
+            return true;
+        else
             return false;
-        
-        return true;
     }
 
 	public static void main(String[] args) {

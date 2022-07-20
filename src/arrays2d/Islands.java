@@ -1,7 +1,9 @@
 package arrays2d;
 
 /**
- * Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+ * Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
+ * An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
+ * You may assume all four edges of the grid are all surrounded by water.
  * 
  * Example 1:
  * 
@@ -43,43 +45,29 @@ public class Islands {
         return count;
     }
     
-    public static void dfs(int x, int y, char[][] grid) {
-        grid[x][y] = 'v';
-        int nextx = x-1; 
-        int nexty = y;
-        
-            
-        if (!(isOutOfBounds(nextx,nexty,grid)) && (grid[nextx][nexty] == '1'))
-            dfs(nextx, nexty, grid);
+    public static void dfs(int row, int col, char[][] grid) {
+        if (isOutOfBounds(row, col, grid))
+            return;
 
-        nextx = x+1; 
-        nexty = y;
-        
-        if (!(isOutOfBounds(nextx,nexty,grid)) && (grid[nextx][nexty] == '1'))
-            dfs(nextx, nexty, grid);
-        
-        nextx = x; 
-        nexty = y-1;
-        
-        if (!(isOutOfBounds(nextx,nexty,grid)) && (grid[nextx][nexty] == '1'))
-            dfs(nextx, nexty, grid);
+        if (grid[row][col] == '1') {
+            grid[row][col] = 'v';
 
-        nextx = x; 
-        nexty = y+1;
-        
-        if (!(isOutOfBounds(nextx,nexty,grid)) && (grid[nextx][nexty] == '1'))
-            dfs(nextx, nexty, grid);
-        
+            dfs(row + 1, col, grid);
+            dfs(row - 1, col, grid);
+            dfs(row, col + 1, grid);
+            dfs(row, col - 1, grid);
+        }
     }
-    
+
     public static boolean isOutOfBounds(int x, int y, char[][] grid) {
         if (x < 0) return true;
         if (y < 0) return true;
         if (x >= grid.length) return true;
         if (y >= grid[0].length) return true;
-        
+
         return false;
     }
+
 	public static void main(String[] args) {
 		char[] arr1 = {'1','1','0','0','0'};
 		char[] arr2 = {'1','1','0','0','0'};
